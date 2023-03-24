@@ -1,5 +1,5 @@
 /*
-Copyright 2021 0xCB - Conor Burns
+Copyright 2022 0xCB - Conor Burns (Conor-Burns)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,14 +14,25 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "quantum.h"
+#include "1337.h"
 
-void eeconfig_init_kb(void) {
-#ifdef BACKLIGHT_ENABLE
-    backlight_enable();
-    backlight_level(5);
-#endif
+led_config_t g_led_config = {{// Key Matrix to LED Index
+                              {3, 1, NO_LED},
+                              {8, 6, 4},
+                              {11, 10, 9}},
+                             {// LED Index to Physical Position
+                              {0, 0},
+                              {112, 0},
+                              {0, 32},
+                              {112, 32},
+                              {224, 32},
+                              {0, 64},
+                              {112, 64},
+                              {224, 64},
 
-    eeconfig_update_kb(0);
-    eeconfig_init_user();
-}
+                              {56, 16},
+                              {168, 16},
+                              {56, 48},
+                              {168, 48}},
+                             {// LED Index to Flag
+                              2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 4, 4}};
