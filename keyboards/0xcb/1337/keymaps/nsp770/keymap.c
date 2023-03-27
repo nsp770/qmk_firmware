@@ -30,9 +30,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_HOME, KC_END,  TO(1)
 ),
 [_FN2] = LAYOUT(
-    _______, _______, _______,
-    _______, _______, TO(0),
-    _______, _______, TO(2)
+    KC_MNXT, KC_MNXT, KC_MPLY,
+    KC_LPAD, KC_MCTL, TO(0),
+    KC_LEFT, KC_RIGHT, TO(2)
 ),
 [_FN3] = LAYOUT(
     _______, _______, _______,
@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [_HOME] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [_FN2]  = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
+    [_FN2]  = {ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN)},
     [_FN3]  = {ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN)},
     [_FN4]  = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
 };
