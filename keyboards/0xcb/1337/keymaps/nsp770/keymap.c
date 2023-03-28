@@ -23,6 +23,11 @@ enum layer_names {
   _FN4
 };
 
+enum custom_keycodes {
+    MAC_RIGHT = SAFE_RANGE,
+    MAC_LEFT,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_HOME] = LAYOUT(
     KC_MPRV, KC_MNXT, KC_MPLY,
@@ -32,12 +37,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_FN2] = LAYOUT(
     KC_MNXT, KC_MNXT, KC_MPLY,
     KC_LPAD, KC_MCTL, TO(0),
-    KC_LEFT, KC_RIGHT, TO(2)
+    MAC_LEFT, MAC_RIGHT, TO(2)
 ),
 [_FN3] = LAYOUT(
     _______, _______, _______,
     _______, _______, TO(1),
-    _______, QK_BOOTLOADER, TO(3)
+    _______, _______, TO(3)
 ),
 [_FN4] = LAYOUT(
     RGB_HUI, RGB_HUD, RGB_MOD,
@@ -66,6 +71,26 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
     return false;
 }
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    // MacOS Right Desktop Swipe
+    case MAC_RIGHT:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_RIGHT)));
+        };
+        break;
+    // MacOS Left Desktop Swipe
+    case MAC_LEFT:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_LEFT)));
+        };
+        break;
+    }
+    return true;
+};
+
 /* oled stuff :) */
 #ifdef OLED_ENABLE
 /* Shows the name of the current layer and locks for the host (CAPS etc.) */
